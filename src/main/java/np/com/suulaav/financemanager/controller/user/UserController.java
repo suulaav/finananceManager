@@ -2,12 +2,10 @@ package np.com.suulaav.financemanager.controller.user;
 
 import lombok.extern.slf4j.Slf4j;
 import np.com.suulaav.financemanager.core.helper.response.RestResponse;
-
 import np.com.suulaav.financemanager.service.api.user.UserCrudService;
 import np.com.suulaav.financemanager.service.domain.user.UserDomain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,53 +53,8 @@ public class UserController {
   }
 
   @PostMapping("/search/list")
-  public ResponseEntity findAllWithPagination() {
+  public ResponseEntity findAllWithPagination(Pageable pageable) {
     log.debug("Inside : User -> FindAllWithPagination");
-    return RestResponse.ok(userCrudService.findAllWithPagination(new Pageable() {
-      @Override
-      public int getPageNumber() {
-        return 0;
-      }
-
-      @Override
-      public int getPageSize() {
-        return 0;
-      }
-
-      @Override
-      public long getOffset() {
-        return 0;
-      }
-
-      @Override
-      public Sort getSort() {
-        return null;
-      }
-
-      @Override
-      public Pageable next() {
-        return null;
-      }
-
-      @Override
-      public Pageable previousOrFirst() {
-        return null;
-      }
-
-      @Override
-      public Pageable first() {
-        return null;
-      }
-
-      @Override
-      public Pageable withPage(int pageNumber) {
-        return null;
-      }
-
-      @Override
-      public boolean hasPrevious() {
-        return false;
-      }
-    }));
+    return RestResponse.ok(userCrudService.findAllWithPagination(pageable));
   }
 }
